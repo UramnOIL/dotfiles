@@ -54,9 +54,9 @@ alias l='ls -ltr --color=auto'
 alias la='ls -la --color=auto'
 alias ll='ls -l --color=auto'
 alias so='source'
-alias v='vim'
-alias vi='vim'
-alias vz='vim ~/.zshrc'
+alias v='nvim'
+alias vinit='nvim ~/.config/nvim/init.vim'
+alias vz='nvim ~/.zshrc'
 alias c='cdr'
 # historyに日付を表示
 alias h='fc -lt '%F %T' 1'
@@ -72,7 +72,7 @@ stty erase ^H
 bindkey "^[[3~" delete-char
 
 # cdの後にlsを実行
-chpwd() { ls -ltr --color=auto }
+chpwd() { ls }
 
 # どこからでも参照できるディレクトリパス
 cdpath=(~)
