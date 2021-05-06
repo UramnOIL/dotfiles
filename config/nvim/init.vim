@@ -1,63 +1,52 @@
-set fenc=utf-8
-set noswapfile
-set autoread
-set showcmd
+let g:python3_host_prog = '/usr/bin/python3'
 
-set number
-set cursorline
-set cursorcolumn
-set virtualedit=onemore
-set smartindent
-set showmatch
-set statusline=2
-
-set wildmode=list:longest
-
-nnoremap j gj
-nnoremap k gk
-
-set list listchars=tab:\▸\-
-set expandtab
-set tabstop=2
-set shiftwidth=2
-
-set ignorecase
-set smartcase
-set incsearch
-set wrapscan
-set hlsearch
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-
+"End dein Scripts-------------------------
 if &compatible
-  set nocompatible
+  set nocompatible               " Be iMproved
 endif
-" Add the dein installation directory into runtimepath
+
+let s:dein_dir = '~/.cache/dein'
+
+" Required:
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
+" Add or remove your plugins here like this:
+"call dein#add('Shougo/neosnippet.vim')
+"call dein#add('Shougo/neosnippet-snippets')
 
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
 
-  " toml
-  call dein#load_toml('~/.config/nvim/dein.toml', {'lazy':0})
-  call dein#load_toml('~/.config/nvim/dein_lazy.toml', {'lazy':0})
+if dein#load_state(s:dein_dir)
+	call dein#begin(s:dein_dir)
 
-  " auto install
-  if dein#check_install()
-    call dein#install()
-  endif
+	call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  call dein#end()
-  call dein#save_state()
+	" プラグインリストを収めた TOML ファイル
+	" 予め TOML ファイル（後述）を用意しておく
+	let g:rc_dir    = '~/.config/nvim/rc'
+	let s:toml      = g:rc_dir . '/dein.toml'
+	let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+        " TOML を読み込み、キャッシュしておく
+        call dein#load_toml(s:toml,      {'lazy': 0})
+        call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+        " 設定終了
+        call dein#end()
+        call dein#save_state()
 endif
 
+
+
+" Required:
 filetype plugin indent on
 syntax enable
 
-colorscheme molokai
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+	call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
+" 行番号を表示
+"set number

@@ -1,5 +1,0 @@
-[[plugins]]
-repo = 'cespare/vim-toml'
-
-[[plugins]]
-repo = 'tomasr/molokai'
